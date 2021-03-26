@@ -16,14 +16,15 @@ import click        # for creating the UI
 
 
 def prompt_user() -> tuple:
-    """promt_user - prompts the user to enter an absolute filepath
+    """prompt_user - prompts the user to enter an absolute filepath
 
     @param: None
 
     @return: a string representing the absolute filepath
-    @rtype : String
-    """
-    pass
+    @rtype : String"""
+
+    file_path=input("Please enter an absolute filepath")
+
 
 
 def perform_modification(filepath: str, mod_function) -> None:
