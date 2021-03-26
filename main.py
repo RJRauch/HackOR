@@ -10,9 +10,10 @@
 
 # necessary libraries
 
-import os           # for file navigation
-import docx         # to read docX files
-import click        # for creating the UI - may be unneccesary
+import os                   # for file navigation
+import docx                 # to read docX files
+import click                # for creating the UI - may be unneccesary
+from pathlib import path    # for creating paths
 
 
 def prompt_user() -> tuple:
@@ -20,7 +21,7 @@ def prompt_user() -> tuple:
 
     @param: None
 
-    @return: A tuple containing (a string representing the file path, [a list of the actions to be undertaken])
+    @return: A tuple containing [0] a string representing the folder path, and [1] a dictionary containing the actions to be performed
     @rtype : Tuple
     """
     pass
@@ -34,21 +35,27 @@ def traverse_directory(action_tuple: tuple) -> None:
 
     @return: None
     """
-    pass
 
+    directory = action_tuple[0]
+    action_dict = action_tuple[1]
+    actions = action_tuple[1].keys()
 
-def perform_modification(filepath: str, mod_function) -> None:
-    """reads in a filepath and a function to modify the files in that path. Performs the function on each file found.
+    for folderName, subfolders, filenames in os.walk(directory):
 
-    @param filepath: The filepath to search for document files
-    @type  filepath: String
+        # create an absolute file path for each file we need to edit
+        for filename in filenames:
+            file_path = Path(directory, filename)
 
-    @param mod_function: The function to be performed on each
-    @type  mod_function: String
-
-    @return: None
-    """
-    pass
+            # for each action contained in the actions array, perform that action
+            if "add_header" in actions:
+                print("adding header to: " + filename)
+                add_header(file_path, action_dict['add_header'])
+            if "add_footer" in actions:
+                print("adding footer to: " + filename)
+                add_footer(file_path, action_dict['add_footer'])
+            if "add_page_numbers" in actions:
+                print("adding page numbers to: " + filename)
+                add_page_numbers(file_path)
 
 
 def add_header(file: str, header_text: str) -> None:
