@@ -5,21 +5,20 @@
 #           Sophia L                                                                            #
 #           Ryan R.                                                                             #
 #           Noah S.                                                                             #
-#           Rain_Bow?                                                                           #
 #                                                                                               #
 #################################################################################################
 
 # necessary libraries
+
 import os           # for file navigation
-import docx         # for manipulating .docX files
+from docx import Document
 import click        # for creating the UI
 
 
 def prompt_user() -> tuple:
     """promt_user - prompts the user to enter an absolute filepath
 
-    @param None:  Description
-    @type  None:  Type
+    @param: None
 
     @return: a string representing the absolute filepath
     @rtype : String
@@ -41,5 +40,41 @@ def perform_modification(filepath: str, mod_function) -> None:
     pass
 
 
-if __name__ == "__main__":
+def add_header(file: str, header_text: str) -> None:
+    """add_header - adds header text to a file
+
+    @param file: the file to add the header to
+    @type  file: String
+
+    @param header_text: The header text to be added to each file
+    @type  header_text: String
+
+    @return: None
+    """
     pass
+
+
+def add_footer(file: str, footer_text: str) -> None:
+    """add_footer - adds footer text to a file
+
+    @param file: the file to add the footer to
+    @type  file: String
+
+    @param footer_text: The footer text to be added to each file
+    @type  footer_text: String
+
+    @return: None
+    """
+    pass
+
+
+def add_page_numbers(file: str) -> None:
+    """add_page_numbers- adds page numbers to each page of a file
+
+    @param file: the file to add the page numbers to
+    @type  file: String
+    """
+
+
+if __name__ == "__main__":
+    print("Hello, World!")
