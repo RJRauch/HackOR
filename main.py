@@ -11,17 +11,28 @@
 # necessary libraries
 
 import os           # for file navigation
-import docx
-import click        # for creating the UI
+import docx         # to read docX files
+import click        # for creating the UI - may be unneccesary
 
 
 def prompt_user() -> tuple:
-    """promt_user - prompts the user to enter an absolute filepath
+    """prompt_user - prompts the user to enter an absolute filepath
 
     @param: None
 
-    @return: a string representing the absolute filepath
-    @rtype : String
+    @return: A tuple containing (a string representing the file path, [a list of the actions to be undertaken])
+    @rtype : Tuple
+    """
+    pass
+
+
+def traverse_directory(action_tuple: tuple) -> None:
+    """traverse_directory - takes an input tuple containing a directory to traverse and actions to perform - reads all files from the directory and passes them to perform modification with the actions specified
+
+    @param action_tuple: A tuple containing the directory to traverse and the actions to execute
+    @type  action_tuple: tuple
+
+    @return: None
     """
     pass
 
