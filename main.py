@@ -11,7 +11,7 @@
 # necessary libraries
 
 import os           # for file navigation
-from docx import Document
+import docx
 import click        # for creating the UI
 
 
@@ -74,6 +74,7 @@ def add_page_numbers(file: str) -> None:
     @param file: the file to add the page numbers to
     @type  file: String
     """
+    pass
 
 
 if __name__ == "__main__":
