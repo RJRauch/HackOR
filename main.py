@@ -108,7 +108,7 @@ def add_footer(file: str, footer_text: str) -> None:
     elif '.txt' in file:
         f_hand = open(file, 'a+')
         f_hand.write(footer_text)
-        f.hand.close()
+        f_hand.close()
 
     else:
         print('Error: You have to enter a text or doc/docx file')
