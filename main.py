@@ -28,6 +28,7 @@ def prompt_user() -> tuple:
     actions = {}
 
     # get the path from the user
+
     print("Hello, welcome to Batch Formatter v0.1 Beta. Please enter the absolute path of the folder where the text files you would like to reformat are located.")
     absolute_path = input()
 
@@ -43,10 +44,10 @@ def prompt_user() -> tuple:
 
     # determine if the user wants to add page numbers
     add_page_numbers = get_binary_answer("add page numbers")
-    if add_page_numbers:
+    if add_page_numbers == True:
         actions[3] = True
 
-    print(actions)
+    return (absolute_path, actions)
 
 
 def get_text(sought_text_type: str) -> str:
@@ -88,7 +89,7 @@ def get_binary_answer(answer_topic: str) -> bool:
     """
 
     # prompt the user on the subject
-    print("Would you like to " + answer_topic + "?")
+    print("Would you like to " + answer_topic + "? [Y/N]")
     answer = input()
 
     # validate their input
@@ -97,7 +98,7 @@ def get_binary_answer(answer_topic: str) -> bool:
         get_binary_answer(answer_topic)
 
     # once valid input has been entered return a bool based on their preference
-    if valid_answer.lower() == 'y' or 'yes':
+    if valid_answer.lower() == 'y' or valid_answer.lower() == 'yes':
         return True
 
     return False
@@ -136,6 +137,11 @@ def traverse_directory(action_tuple: tuple) -> None:
 
     directory = action_tuple[0]
     action_dict = action_tuple[1]
+    print(action_dict)
+    if len(action_dict) == 0:
+        print("No Actions Selected")
+        return
+
     actions = action_tuple[1].keys()
 
     for folderName, subfolders, filenames in os.walk(directory):
@@ -230,6 +236,11 @@ def add_page_numbers(file: str) -> None:
     pass
 
 
+def main():
+    actions = prompt_user()
+    traverse_directory(actions)
+    print("Files Modified")
+
+
 if __name__ == "__main__":
-    test_tuple = ('/home/noah/Developer/HackOR/HackOR/test_documents',
-                  {"add_header": "this is a test"})
+    main()
