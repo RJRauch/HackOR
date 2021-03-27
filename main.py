@@ -44,7 +44,7 @@ def perform_modification(filepath: str, mod_function) -> None:
 def add_header(file: str, header_text: str) -> None:
     """Mutates doc, docx, and txt files by adding a custom header.
 
-    @param file: the file path of the file to add the header to
+    @param file: The file path of the file to add the header to
     @type  file: String
 
     @param header_text: The header text to be added to each file
