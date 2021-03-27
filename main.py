@@ -16,7 +16,6 @@ import docx                 # to read docX files
 from pathlib import Path    # for creating paths
 
 
-
 def prompt_user() -> tuple:
     """prompt_user - prompts the user to enter an absolute filepath
 
@@ -114,7 +113,6 @@ def validate_user_answer(answer: str) -> str:
     @rtype : String
     """
 
-
     # if the answer is yes or no return true
     if answer.lower() == 'y' or answer.lower() == 'n':
         return answer.lower()
@@ -170,7 +168,6 @@ def add_header(file: str, header_text: str) -> None:
     @return: None
     """
 
-
     # Checks if doc or docx file, adds header to it
     if ".doc" in file or ".docx" in file:
         doc = docx.Document(file)
@@ -178,7 +175,7 @@ def add_header(file: str, header_text: str) -> None:
 
     # Checks if txt file, adds header to it
     elif ".txt" in file:
-        doc = open(file, "w+") # w+ puts cursor at beginning of file
+        doc = open(file, "w+")  # w+ puts cursor at beginning of file
         doc.write(header_text + "\n")
         doc.close()
 
@@ -202,22 +199,16 @@ def add_footer(file: str, footer_text: str) -> None:
 
     # Check for  doc/docx and add footer to it
     if '.doc' in file or '.docx' in file:
-
         # Create footer for document object
         doc = docx.Document(file)
 
         # footer section
-        footer_section = doc.sections[0]
-        footer = footer_section.footer
-
-        # footer text
-        footer_text = footer.paragraphs[0]
-        footer_text.text = footer_text
+        footer = doc.sections[0].footer
+        footer.paragraphs[0].text = footer_text
+        # close file
         doc.save(file)
 
-        # Check for txt file and add footer to it
-
-        # This will technically create new lines from paragraph text and just add to the end of the document
+        # txt document This will technically create new lines from paragraph text and just add to the end of the document
         # It will not create consistent page footers as there are not pages in a text document
 
     elif '.txt' in file:
@@ -226,7 +217,8 @@ def add_footer(file: str, footer_text: str) -> None:
         f_hand.close()
 
     else:
-        print('Error: You have to enter a text or doc/docx file')
+        print(
+            'Error: You have to enter a text or doc/docx file or this will never EVER work')
 
 
 def add_page_numbers(file: str) -> None:
@@ -241,4 +233,3 @@ def add_page_numbers(file: str) -> None:
 if __name__ == "__main__":
     test_tuple = ('/home/noah/Developer/HackOR/HackOR/test_documents',
                   {"add_header": "this is a test"})
-    prompt_user()
