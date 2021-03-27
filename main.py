@@ -73,20 +73,6 @@ def add_header(file: str, header_text: str) -> None:
 
 
 def add_footer(file: str, footer_text: str) -> None:
-    """add_footer - adds footer text to a file
-
-    @param file: the file to add the footer to
-    @type  file: String
-
-    @param footer_text: The footer text to be added to each file
-    @type  footer_text: String
-
-    @return: None
-    """
-    pass
-
-
-def add_footer(file: str, footer_text: str) -> None:
     """
     This function will add a footer to .docx/doc/txt file
 
@@ -100,31 +86,32 @@ def add_footer(file: str, footer_text: str) -> None:
     """
 
     # Check for  doc/docx and add footer to it
-       if '.doc' in file or '.docx' in file:
-            # Create footer for document object
-            doc = docx.Document(file)
-            # footer section
-            footer_section = doc.sections[0]
-            footer = footer_section.footer
-            # footer text
-            footer_text = footer.paragraphs[0]
-            footer_text.text = footer_text
-            doc.save(file)
+    if '.doc' in file or '.docx' in file:
+
+        # Create footer for document object
+        doc = docx.Document(file)
+
+        # footer section
+        footer_section = doc.sections[0]
+        footer = footer_section.footer
+
+        # footer text
+        footer_text = footer.paragraphs[0]
+        footer_text.text = footer_text
+        doc.save(file)
 
         # Check for txt file and add footer to it
 
         # This will technically create new lines from paragraph text and just add to the end of the document
         # It will not create consistent page footers as there are not pages in a text document
 
-        elif .'txt' in file:
-            f_hand = open(file,'a+')
-            f_hand.write(footer_text)
-            f.hand.close()
+    elif '.txt' in file:
+        f_hand = open(file, 'a+')
+        f_hand.write(footer_text)
+        f.hand.close()
 
-
-        else:
-            print('Error: You have to enter a text or doc/docx file')
-
+    else:
+        print('Error: You have to enter a text or doc/docx file')
 
 
 def add_page_numbers(file: str) -> None:
