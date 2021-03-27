@@ -12,7 +12,6 @@
 
 import os                   # for file navigation
 import docx                 # to read docX files
-import click                # for creating the UI - may be unneccesary
 from pathlib import Path    # for creating paths
 
 
@@ -24,7 +23,108 @@ def prompt_user() -> tuple:
     @return: A tuple containing [0] a string representing the folder path, and [1] a dictionary containing the actions to be performed
     @rtype : Tuple
     """
-    pass
+
+    actions = {}
+
+    # get the path from the user
+    print("Hello, welcome to Batch Formatter v0.1 Beta. Please enter the absolute path of the folder where the text files you would like to reformat are located.")
+    absolute_path = input()
+
+    # determine if the user would like to
+    header_text = get_text("header")
+    if header_text != None:
+        actions[1] = header_text
+
+    # determine if the user wants to add a footer
+    footer_text = get_text("footer")
+    if footer_text != None:
+        actions[2] = footer_text
+
+    # determine if the user wants to add page numbers
+    page_numbers = get_binary_answer("add page numbers")
+    if page_numbers:
+        actions[3] = True
+
+    print(actions)
+
+
+def get_text(sought_text_type: str) -> str:
+    """get_text - prompts the user to enter the text they want for the header - returns none if they are not interested
+
+    @param sought_text_type:    A description of the purpose you are seeking text from the user for
+    @param type:                String
+
+    @return: The user's string if one was entered, else None
+    @rtype : str
+    """
+
+    # prompt the user to see if they are interested in adding a header
+    print("Would you like to enter a " + sought_text_type + "? [Y/N]")
+    answer = input()
+
+    # call a validator to see if they need to re-enter
+    valid_answer = answer_is_valid(answer)
+
+    if not valid_answer:
+        get_text(sought_text_type)
+
+    if valid_answer == 'y' or valid_answer == 'yes':
+        print("What would you like to add as your " + sought_text_type + "?")
+        text = input()
+
+        return text
+
+    return False
+
+
+def get_binary_answer(answer_topic: str) -> bool:
+    """get_binary_answer - prompts the user to enter whether or not they are interested in a given topic and returns an answer
+
+    @param answer_topic : The topic that you are seeking an answer from the user on
+    @param type         : String
+
+    @return: A bool indicating if the user is interested in the topic
+    @rtype : Bool
+    """
+
+    # prompt the user on the subject
+    print("Would you like to " + answer_topic + "?")
+    answer = input()
+
+    # validate their input
+    valid_answer = answer_is_valid(answer)
+    if valid_answer == None:
+        get_binary_answer(answer_topic)
+
+    # once valid input has been entered return a bool based on their preference
+    if valid_answer.lower() == 'y' or 'yes':
+        return True
+
+    return False
+
+
+def answer_is_valid(answer: str) -> bool:
+    """answer_is_valid - validates user input gauranteeing it is either yes, no, or some parseable variation on one of them.
+
+    @param answer: The user's input
+    @type  answer: String
+
+    @return: Returns the answer if it was valid, else None
+    @rtype : String
+
+    @raise e:  Description
+    """
+
+    # if the answer is yes or no return true
+    if answer.lower() == 'y' or answer.lower() == 'n':
+        return answer.lower()
+
+    if answer.lower() == 'yes' or answer.lower() == 'no':
+        return answer.lower()
+
+    else:
+        print("You must enter [Y]es or [N]o")
+        return None
 
 
 def traverse_directory(action_tuple: tuple) -> None:
@@ -46,14 +146,14 @@ def traverse_directory(action_tuple: tuple) -> None:
         for filename in filenames:
             file_path = Path(directory, filename)
 
-            # for each action contained in the actions array, perform that action
-            if "add_header" in actions:
+            # for each action contained in the actions array, alert the user of what you will do then perform that action
+            if "1" in actions:
                 print("adding header to: " + filename)
-                add_header(file_path, action_dict['add_header'])
-            if "add_footer" in actions:
+                add_header(file_path, action_dict['1'])
+            if "2" in actions:
                 print("adding footer to: " + filename)
-                add_footer(file_path, action_dict['add_footer'])
-            if "add_page_numbers" in actions:
+                add_footer(file_path, action_dict['2'])
+            if "3" in actions:
                 print("adding page numbers to: " + filename)
                 add_page_numbers(file_path)
 
@@ -69,6 +169,7 @@ def add_header(file: str, header_text: str) -> None:
 
     @return: None
     """
+
     pass
 
 
@@ -78,7 +179,6 @@ def add_footer(file: str, footer_text: str) -> None:
 
     @param file: the file to add the footer to
     @Type file: string
-
     @Param footer_Text: the footer text to be added to each file
     @ type footer_text: string'''
 
@@ -126,4 +226,4 @@ def add_page_numbers(file: str) -> None:
 if __name__ == "__main__":
     test_tuple = ('/home/noah/Developer/HackOR/HackOR/test_documents',
                   {"add_header": "this is a test"})
-    traverse_directory(test_tuple)
+    prompt_user()
