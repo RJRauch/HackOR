@@ -41,8 +41,8 @@ def prompt_user() -> tuple:
         actions[2] = footer_text
 
     # determine if the user wants to add page numbers
-    page_numbers = get_binary_answer("add page numbers")
-    if page_numbers:
+    add_page_numbers = get_binary_answer("add page numbers")
+    if add_page_numbers:
         actions[3] = True
 
     print(actions)
@@ -63,7 +63,7 @@ def get_text(sought_text_type: str) -> str:
     answer = input()
 
     # call a validator to see if they need to re-enter
-    valid_answer = answer_is_valid(answer)
+    valid_answer = validate_user_answer(answer)
 
     if not valid_answer:
         get_text(sought_text_type)
@@ -71,10 +71,9 @@ def get_text(sought_text_type: str) -> str:
     if valid_answer == 'y' or valid_answer == 'yes':
         print("What would you like to add as your " + sought_text_type + "?")
         text = input()
-
         return text
 
-    return False
+    return None
 
 
 def get_binary_answer(answer_topic: str) -> bool:
@@ -92,7 +91,7 @@ def get_binary_answer(answer_topic: str) -> bool:
     answer = input()
 
     # validate their input
-    valid_answer = answer_is_valid(answer)
+    valid_answer = validate_user_answer(answer)
     if valid_answer == None:
         get_binary_answer(answer_topic)
 
@@ -103,7 +102,7 @@ def get_binary_answer(answer_topic: str) -> bool:
     return False
 
 
-def answer_is_valid(answer: str) -> bool:
+def validate_user_answer(answer: str) -> str:
     """answer_is_valid - validates user input gauranteeing it is either yes, no, or some parseable variation on one of them.
 
     @param answer: The user's input
@@ -111,8 +110,6 @@ def answer_is_valid(answer: str) -> bool:
 
     @return: Returns the answer if it was valid, else None
     @rtype : String
-
-    @raise e:  Description
     """
 
     # if the answer is yes or no return true
