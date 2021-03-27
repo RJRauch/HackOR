@@ -87,22 +87,16 @@ def add_footer(file: str, footer_text: str) -> None:
 
     # Check for  doc/docx and add footer to it
     if '.doc' in file or '.docx' in file:
-
         # Create footer for document object
         doc = docx.Document(file)
 
         # footer section
-        footer_section = doc.sections[0]
-        footer = footer_section.footer
-
-        # footer text
-        footer_text = footer.paragraphs[0]
-        footer_text.text = footer_text
+        footer = doc.sections[0].footer
+        footer.paragraphs[0].text = footer_text
+        # close file
         doc.save(file)
 
-        # Check for txt file and add footer to it
-
-        # This will technically create new lines from paragraph text and just add to the end of the document
+        # txt document This will technically create new lines from paragraph text and just add to the end of the document
         # It will not create consistent page footers as there are not pages in a text document
 
     elif '.txt' in file:
@@ -111,7 +105,9 @@ def add_footer(file: str, footer_text: str) -> None:
         f_hand.close()
 
     else:
-        print('Error: You have to enter a text or doc/docx file')
+        print('Error: You have to enter a text or doc/docx file or this will never EVER work')
+
+
 
 
 def add_page_numbers(file: str) -> None:

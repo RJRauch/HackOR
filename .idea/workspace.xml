@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e5c32e1-1021-4fb7-84b9-3fdbd3f5ac15" name="Default Changelist" comment="#I created add_footer function">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Footer.py" afterDir="false" />
+    <list default="true" id="9e5c32e1-1021-4fb7-84b9-3fdbd3f5ac15" name="Default Changelist" comment="Testing ryan commit to footer">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Footer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Footer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +89,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616802858752</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Testing ryan commit to footer">
+      <created>1616807153446</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1616807153446</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Testing ryan commit to footer">
+      <created>1616807236832</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1616807236832</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,6 +133,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="#Created file_path in prompt user" />
     <MESSAGE value="#I created add_footer function" />
-    <option name="LAST_COMMIT_MESSAGE" value="#I created add_footer function" />
+    <MESSAGE value="Testing ryan commit to footer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing ryan commit to footer" />
   </component>
 </project>
