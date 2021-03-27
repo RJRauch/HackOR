@@ -12,7 +12,7 @@
 
 import os           # for file navigation
 import docx
-import click        # for creating the UI
+import click        # for crf
 
 
 def prompt_user() -> tuple:
@@ -42,9 +42,9 @@ def perform_modification(filepath: str, mod_function) -> None:
 
 
 def add_header(file: str, header_text: str) -> None:
-    """add_header - adds header text to a file
+    """Mutates doc, docx, and txt files by adding a custom header.
 
-    @param file: the file to add the header to
+    @param file: the file path of the file to add the header to
     @type  file: String
 
     @param header_text: The header text to be added to each file
@@ -52,7 +52,22 @@ def add_header(file: str, header_text: str) -> None:
 
     @return: None
     """
-    pass
+
+    # Checks if doc or docx file, adds header to it
+    if ".doc" in file or ".docx" in file:
+        doc = docx.Document(file)
+        doc.add_heading(header_text, 0)
+
+    # Checks if txt file, adds header to it
+    elif ".txt" in file:
+        doc = open(file, "w+") # w+ puts cursor at beginning of file
+        doc.write(header_text + "\n")
+        doc.close()
+
+    else:
+        print("File must be .doc, .docx, or .txt format.")
+
+    return None
 
 
 def add_footer(file: str, footer_text: str) -> None:
