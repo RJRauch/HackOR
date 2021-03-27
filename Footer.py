@@ -59,17 +59,18 @@ def traverse_directory(action_tuple: tuple) -> None:
 
 
 def add_header(file: str, header_text: str) -> None:
-    """add_header - adds header text to a file
-
-    @param file: the file to add the header to
-    @type  file: String
-
-    @param header_text: The header text to be added to each file
-    @type  header_text: String
-
-    @return: None
-    """
-    pass
+    if ".doc" in file or ".docx" in file:
+        doc = docx.Document(file)
+        header = doc.sections[0].header
+        header.paragraphs[0].text = header_text
+        doc.save(file)
+        # Checks if txt file, adds header to it
+    elif ".txt" in file:
+        with open(file, 'r+') as file_h:
+            content = file_h.read()
+            file_h.seek(0, 0)
+            file_h.write(header_text.rstrip('\r\n') + '\n' + content)
+            file_h.close()
 
 
 def add_footer(file: str, footer_text: str) -> None:
