@@ -174,21 +174,18 @@ def add_header(file: str, header_text: str) -> None:
     @return: None
     """
 
-    # Checks if doc or docx file, adds header to it
     if ".doc" in file or ".docx" in file:
         doc = docx.Document(file)
-        doc.add_heading(header_text, 0)
-
-    # Checks if txt file, adds header to it
+        header = doc.sections[0].header
+        header.paragraphs[0].text = header_text
+        doc.save(file)
+        # Checks if txt file, adds header to it
     elif ".txt" in file:
-        doc = open(file, "w+")  # w+ puts cursor at beginning of file
-        doc.write(header_text + "\n")
-        doc.close()
-
-    else:
-        print("File must be .doc, .docx, or .txt format.")
-
-    return None
+        with open(file, 'r+') as file_h:
+            content = file_h.read()
+            file_h.seek(0, 0)
+            file_h.write(header_text.rstrip('\r\n') + '\n' + content)
+            file_h.close()
 
 
 def add_footer(file: str, footer_text: str) -> None:
