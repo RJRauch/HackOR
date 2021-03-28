@@ -35,17 +35,12 @@ def prompt_user() -> tuple:
     # determine if the user would like to
     header_text = get_text("header")
     if header_text != None:
-        actions[1] = header_text
+        actions["1"] = header_text
 
     # determine if the user wants to add a footer
     footer_text = get_text("footer")
     if footer_text != None:
-        actions[2] = footer_text
-
-    # determine if the user wants to add page numbers
-    add_page_numbers = get_binary_answer("add page numbers")
-    if add_page_numbers == True:
-        actions[3] = True
+        actions["2"] = footer_text
 
     return (absolute_path, actions)
 
@@ -146,20 +141,16 @@ def traverse_directory(action_tuple: tuple) -> None:
 
     for folderName, subfolders, filenames in os.walk(directory):
 
+        os.chdir(folderName)
         # create an absolute file path for each file we need to edit
         for filename in filenames:
-            file_path = Path(directory, filename)
-
             # for each action contained in the actions array, alert the user of what you will do then perform that action
             if "1" in actions:
                 print("adding header to: " + filename)
-                add_header(file_path, action_dict['1'])
+                add_header(filename, action_dict['1'])
             if "2" in actions:
                 print("adding footer to: " + filename)
-                add_footer(file_path, action_dict['2'])
-            if "3" in actions:
-                print("adding page numbers to: " + filename)
-                add_page_numbers(file_path)
+                add_footer(filename, action_dict['2'])
 
 
 def add_header(file: str, header_text: str) -> None:
