@@ -3,6 +3,8 @@ _automatically add headers and footers to all the doc and txt files in a directo
 
 ## ![Alt Text](https://thumbs.gfycat.com/MealyWaryCob-size_restricted.gif)
 
+## ![](HackOR '21 Project Demo.GIF)
+
 File Zeus is a simple utility written in python to automate the addition of headers and footers to documents in batches. The five steps, as promised, are:
 
 1. Enter the absolute path of the directory where the file are located.
