@@ -1,7 +1,7 @@
 # File Zeus
 _automatically add headers and footers to all the doc and txt files in a directory in five steps or less_
 
-## (insert gif here)
+## https://gfycat.com/mealywarycob
 
 File Zeus is a simple utility written in python to automate the addition of headers and footers to documents in batches. The five steps, as promised, are:
 
